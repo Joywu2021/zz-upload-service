@@ -12,71 +12,70 @@ const app = express();
 const router = express.Router();
 
 // app.use(express.json());
-app.use(cors());
+// app.use(cors());
 
-// const mongoURI = "mongodb+srv://huanwu:ABCD1234@webproject.qhq6u.mongodb.net/?retryWrites=true&w=majority";
-// // Create mongo connection
-// const conn = mongoose.createConnection(mongoURI, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
-// // Init gfs
-// let gfs;
-// conn.once('open', () => {
-//   // Init stream
-//   gfs = Grid(conn.db, mongoose.mongo);
-//   gfs.collection('uploads');
-// });
-// // Create storage engine
-// const storage = new GridFsStorage({
-//   url: mongoURI,
-//   file: (req, file) => {
-//     return new Promise((resolve, reject) => {
-//       crypto.randomBytes(16, (err, buf) => {
-//         if (err) {
-//           return reject(err);
-//         }
-//         //const filename = buf.toString('hex') + path.extname(file.originalname);
-//         const fileInfo = {
-//           filename: file.originalname,
-//           bucketName: 'uploads'
-//         };
-//         resolve(fileInfo);
-//       });
-//     });
-//   }
-// });
-// const upload = multer({ storage });
+const mongoURI = "mongodb+srv://huanwu:ABCD1234@webproject.qhq6u.mongodb.net/?retryWrites=true&w=majority";
+// Create mongo connection
+const conn = mongoose.createConnection(mongoURI, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
+// Init gfs
+let gfs;
+conn.once('open', () => {
+  // Init stream
+  gfs = Grid(conn.db, mongoose.mongo);
+  gfs.collection('uploads');
+});
+// Create storage engine
+const storage = new GridFsStorage({
+  url: mongoURI,
+  file: (req, file) => {
+    return new Promise((resolve, reject) => {
+      crypto.randomBytes(16, (err, buf) => {
+        if (err) {
+          return reject(err);
+        }
+        //const filename = buf.toString('hex') + path.extname(file.originalname);
+        const fileInfo = {
+          filename: file.originalname,
+          bucketName: 'uploads'
+        };
+        resolve(fileInfo);
+      });
+    });
+  }
+});
+const upload = multer({ storage });
 
-// // @route POST /upload
-// // @desc  Uploads file to DB
-// router.post('/upload', upload.single('file'), (req, res) => {
-//   res.json({ files: true });
-// });
+// @route POST /upload
+// @desc  Uploads file to DB
+router.post('/upload', upload.single('file'), (req, res) => {
+  res.json({ files: true });
+});
 
-// // @route GET /
-// // @desc Loads form
-// router.get('/getUploadedFileList', (req, res) => {
-//   gfs.files.find().toArray((err, files) => {
-//     // Check if files
-//     if (!files || files.length === 0) {
-//       res.json({ files: false });
-//     } else {
-//       res.json({ files: files });
-//     }
-//   });
-// });
+// @route GET /
+// @desc Loads form
+router.get('/getUploadedFileList', (req, res) => {
+  gfs.files.find().toArray((err, files) => {
+    // Check if files
+    if (!files || files.length === 0) {
+      res.json({ files: false });
+    } else {
+      res.json({ files: files });
+    }
+  });
+});
 
-// // @route DELETE /files/:id
-// // @desc  Delete file
-// router.delete('/delete/:id', (req, res) => {
-//   gfs.remove({ _id: req.params.id, root: 'uploads' }, (err, gridStore) => {
-//     if (err) {
-//       return res.status(404).json({ err: err });
-//     }
-//     else {
-//       res.json({ files: true });
-//     }
-//   });
-// });
-
+// @route DELETE /files/:id
+// @desc  Delete file
+router.delete('/delete/:id', (req, res) => {
+  gfs.remove({ _id: req.params.id, root: 'uploads' }, (err, gridStore) => {
+    if (err) {
+      return res.status(404).json({ err: err });
+    }
+    else {
+      res.json({ files: true });
+    }
+  });
+});
 
 // //For Local Test
 // // app.use("/", router);
@@ -90,10 +89,9 @@ app.use(cors());
 // module.exports.handler = serverless(app);
 
 
-
 router.get("/", (req, res) => {
   res.json({
-    hello: "hi!"
+    hello: "hi! welcome!"
   });
 });
 
