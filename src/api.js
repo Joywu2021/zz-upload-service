@@ -1,10 +1,10 @@
 const express = require('express');
-// const mongoose = require('mongoose');
-// const cors = require('cors');
-// const path = require('path');
-// const multer = require('multer');
-// const { GridFsStorage } = require('multer-gridfs-storage');
-// const Grid = require('gridfs-stream');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const path = require('path');
+const multer = require('multer');
+const { GridFsStorage } = require('multer-gridfs-storage');
+const Grid = require('gridfs-stream');
 // const crypto = require('crypto');
 const serverless = require("serverless-http");
 
@@ -14,35 +14,35 @@ const router = express.Router();
 // app.use(express.json());
 // app.use(cors());
 
-// // Create mongo connection
-// const conn = mongoose.createConnection("mongodb+srv://huanwu:ABCD1234@webproject.qhq6u.mongodb.net/?retryWrites=true&w=majority", { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
+// Create mongo connection
+const conn = mongoose.createConnection("mongodb+srv://huanwu:ABCD1234@webproject.qhq6u.mongodb.net/?retryWrites=true&w=majority", { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
 // // Init gfs
 // let gfs;
-// conn.once('open', () => {
-//   // Init stream
-//   gfs = Grid(conn.db, mongoose.mongo);
-//   gfs.collection('uploads');
-// });
-// // Create storage engine
-// const storage = new GridFsStorage({
-//   url: mongoURI,
-//   file: (req, file) => {
-//     return new Promise((resolve, reject) => {
-//       crypto.randomBytes(16, (err, buf) => {
-//         if (err) {
-//           return reject(err);
-//         }
-//         //const filename = buf.toString('hex') + path.extname(file.originalname);
-//         const fileInfo = {
-//           filename: file.originalname,
-//           bucketName: 'uploads'
-//         };
-//         resolve(fileInfo);
-//       });
-//     });
-//   }
-// });
-// const upload = multer({ storage });
+conn.once('open', () => {
+  // Init stream
+  gfs = Grid(conn.db, mongoose.mongo);
+  gfs.collection('uploads');
+});
+// Create storage engine
+const storage = new GridFsStorage({
+  url: mongoURI,
+  file: (req, file) => {
+    return new Promise((resolve, reject) => {
+      crypto.randomBytes(16, (err, buf) => {
+        if (err) {
+          return reject(err);
+        }
+        //const filename = buf.toString('hex') + path.extname(file.originalname);
+        const fileInfo = {
+          filename: file.originalname,
+          bucketName: 'uploads'
+        };
+        resolve(fileInfo);
+      });
+    });
+  }
+});
+const upload = multer({ storage });
 
 // // @route POST /upload
 // // @desc  Uploads file to DB
