@@ -1,11 +1,11 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const path = require('path');
-const multer = require('multer');
-const { GridFsStorage } = require('multer-gridfs-storage');
-const Grid = require('gridfs-stream');
-const crypto = require('crypto');
+// const mongoose = require('mongoose');
+// const cors = require('cors');
+// const path = require('path');
+// const multer = require('multer');
+// const { GridFsStorage } = require('multer-gridfs-storage');
+// const Grid = require('gridfs-stream');
+// const crypto = require('crypto');
 const serverless = require("serverless-http");
 
 const app = express();
@@ -66,18 +66,18 @@ router.get('/getUploadedFileList', (req, res) => {
   // });
 });
 
-// @route DELETE /files/:id
-// @desc  Delete file
-router.delete('/delete/:id', (req, res) => {
-  gfs.remove({ _id: req.params.id, root: 'uploads' }, (err, gridStore) => {
-    if (err) {
-      return res.status(404).json({ err: err });
-    }
-    else {
-      res.json({ files: true });
-    }
-  });
-});
+// // @route DELETE /files/:id
+// // @desc  Delete file
+// router.delete('/delete/:id', (req, res) => {
+//   gfs.remove({ _id: req.params.id, root: 'uploads' }, (err, gridStore) => {
+//     if (err) {
+//       return res.status(404).json({ err: err });
+//     }
+//     else {
+//       res.json({ files: true });
+//     }
+//   });
+// });
 
 // //For Local Test
 // // app.use("/", router);
