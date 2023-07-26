@@ -1,19 +1,18 @@
-// const express = require('express');
-// const mongoose = require('mongoose');
-// const cors = require('cors');
-// const path = require('path');
-// const multer = require('multer');
-// const { GridFsStorage } = require('multer-gridfs-storage');
-// const Grid = require('gridfs-stream');
-// const crypto = require('crypto');
-// const serverless = require("serverless-http");
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const path = require('path');
+const multer = require('multer');
+const { GridFsStorage } = require('multer-gridfs-storage');
+const Grid = require('gridfs-stream');
+const crypto = require('crypto');
+const serverless = require("serverless-http");
 
-// const app = express();
+const app = express();
+const router = express.Router();
 
-// app.use(express.json());
-// app.use(cors());
-
-// const router = express.Router();
+app.use(express.json());
+app.use(cors());
 
 // const mongoURI = "mongodb+srv://huanwu:ABCD1234@webproject.qhq6u.mongodb.net/?retryWrites=true&w=majority";
 // // Create mongo connection
@@ -78,12 +77,6 @@
 //   });
 // });
 
-// router.get("/", (req, res) => {
-//   res.json({
-//     'path': 'Home',
-//     'hello': "hi!"
-//   });
-// });
 
 // //For Local Test
 // // app.use("/", router);
@@ -96,11 +89,7 @@
 // module.exports = app;
 // module.exports.handler = serverless(app);
 
-const express = require("express");
-const serverless = require("serverless-http");
 
-const app = express();
-const router = express.Router();
 
 router.get("/", (req, res) => {
   res.json({
