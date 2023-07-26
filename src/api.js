@@ -11,7 +11,7 @@ const serverless = require("serverless-http");
 const app = express();
 const router = express.Router();
 
-app.use(express.json());
+// app.use(express.json());
 app.use(cors());
 
 // const mongoURI = "mongodb+srv://huanwu:ABCD1234@webproject.qhq6u.mongodb.net/?retryWrites=true&w=majority";
