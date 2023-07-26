@@ -91,7 +91,7 @@ router.get("/j", (req, res) => {
 
 
 //For deploy
-app.use(`/.netlify/functions/server`, router);
+app.use(`/.netlify/functions/api`, router);
 
 module.exports = app;
 module.exports.handler = serverless(app);
