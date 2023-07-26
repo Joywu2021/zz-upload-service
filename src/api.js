@@ -78,7 +78,7 @@ router.delete('/delete/:id', (req, res) => {
   });
 });
 
-router.get("/j", (req, res) => {
+router.get("/", (req, res) => {
   res.json({
     'path': 'Home',
     'hello': "hi!"
