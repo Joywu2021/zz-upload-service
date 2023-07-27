@@ -11,24 +11,12 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+const PORT = process.env.PORT || 3000
 
-const mongoURI = "";
 // Create mongo connection
 const conn = mongoose.createConnection(process.env.MONGO_URI, { useUnifiedTopology: true, useNewUrlParser: true});
 
-const PORT = process.env.PORT || 3000
-
 mongoose.set('strictQuery', false);
-
-// const connectDB = async () => {
-//   try {
-//     const conn = await mongoose.connect(process.env.MONGO_URI);
-//     console.log(`MongoDB Connected: ${conn.connection.host}`);
-//   } catch (error) {
-//     console.log(error);
-//     process.exit(1);
-//   }
-// }
 
 // Init gfs
 let gfs;
@@ -101,9 +89,6 @@ app.get("/", (req, res) => {
 // app.use("/", router);
 // app.listen(3003);
 
-//Connect to the database before listening
-// connectDB().then(() => {
-  app.listen(PORT, () => {
-    console.log("listening for requests");
-  })
-// })
+app.listen(PORT, () => {
+  console.log("listening for requests");
+})
