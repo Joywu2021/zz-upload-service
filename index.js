@@ -6,7 +6,6 @@ const multer = require('multer');
 const { GridFsStorage } = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 const crypto = require('crypto');
-// const client = new MongoClient(process.env.MONGO_URI);
 
 const app = express();
 
@@ -28,7 +27,7 @@ conn.once('open', () => {
 });
 // Create storage engine
 const storage = new GridFsStorage({
-  url: process.env.MONGO_URI,
+  url: 'mongodb+srv://huanwu:ABCD1234@webproject.qhq6u.mongodb.net/?retryWrites=true&w=majority',
   file: (req, file) => {
     return new Promise((resolve, reject) => {
       crypto.randomBytes(16, (err, buf) => {
