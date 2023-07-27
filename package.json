@@ -14,8 +14,10 @@
     "serverless-http": "^1.9.1"
   },
   "scripts": {
-    "start": "NODE_ENV=development NODE_OPTIONS=--openssl-legacy-provider ./node_modules/.bin/netlify-lambda serve src",
-    "build": "NODE_ENV=production NODE_OPTIONS=--openssl-legacy-provider ./node_modules/.bin/netlify-lambda build src"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "repository": {
     "type": "git",
