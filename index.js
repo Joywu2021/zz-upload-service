@@ -15,7 +15,7 @@ app.use(cors());
 const PORT = process.env.PORT || 3000
 
 // Create mongo connection
-const conn = mongoose.createConnection(process.env.MONGO_URI, { useUnifiedTopology: true, useNewUrlParser: true});
+const conn = mongoose.createConnection('mongodb+srv://huanwu:ABCD1234@webproject.qhq6u.mongodb.net/?retryWrites=true&w=majority', { useUnifiedTopology: true, useNewUrlParser: true});
 
 mongoose.set('strictQuery', false);
 
